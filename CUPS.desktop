@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=CUPS-alle-Druckaufträge
+Comment=Bla
+Icon=/usr/share/pixmaps/iceweasle.xpm
+Exec=iceweasel http://localhost:631/jobs?which_jobs=all
+Terminal=false
+Categories=Utility;Application;

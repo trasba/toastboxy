@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Toastboxy
+Comment=Bla
+Icon=/usr/share/pixmaps/leafpad.xpm
+Exec=python3 /home/pi/Downloads/Pyhton/toastboxy.py
+Path=/home/pi/Downloads/
+Terminal=false
+Categories=Utility;Application;

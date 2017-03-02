@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Python-Shortcut
+Comment=Bla
+Icon=/usr/share/pixmaps/pcmanfm.xpm
+Exec=pcmanfm /home/pi/Downloads/Pyhton/
+Terminal=false
+Categories=Utility;Application;
