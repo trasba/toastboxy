@@ -30,7 +30,13 @@ prevResY = 972
 camera.resolution = (prevResX,prevResY)
 #camera.hflip = True
 #camera.vflip = True
+#camera.preview.alpha = 200
+#camera.preview.fullscreen = False
+#camera.preview.window = (0,0,prevResX,prevResY)
 camera.preview_alpha = 200
+camera.preview_fullscreen = False
+camera.preview_window = (0,0,prevResX,prevResY)
+
 global done
 done = False
 global bigfont
@@ -109,6 +115,7 @@ def stuff(event):
         if main.number == 4:
             c1.itemconfigure(text1,font=(smallfont),text='PICTURE\nOK?')
             c1.update()
+            camera.stop_preview()	    
             
         if main.number == 5:
             imgname = time.strftime("%Y%m%d-%H%M%S")
