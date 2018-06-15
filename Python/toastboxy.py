@@ -113,12 +113,13 @@ def stuff(event):
             #t = threading.Thread(target=processing)
             #t.start()
             print ("collage_%s.jpg" % imgname)
-            command = "convert  -size 2802x1891 xc:skyblue -draw \"image over 0,0 2802x1891\
-            'frame.jpg'\" -draw \"image over 90,90 1110,832\
-            'storage/single_%s.jpg'\" -draw \"image over 1230,90 1110,832\
-            'storage/single_%s.jpg'\" -draw \"image over  90,952 1110,832\
-            'storage/single_%s.jpg'\" -draw \"image over 1230,952 1110,832\
-            'storage/single_%s.jpg'\" -quality 100 storage/collage_%s.jpg" % (picname[1],picname[2],picname[3],picname[4],imgname)
+            command = "convert  -size 2802x1891 xc:skyblue \
+	    -draw \"image over 0,0 2802,1891 'frame.jpg'\" \
+	    -draw \"image over 90,90 1110,832 'storage/single_%s.jpg'\" \
+	    -draw \"image over 1230,90 1110,832 'storage/single_%s.jpg'\" \
+	    -draw \"image over  90,952 1110,832 'storage/single_%s.jpg'\" \
+	    -draw \"image over 1230,952 1110,832 'storage/single_%s.jpg'\" \
+	    -quality 100 storage/collage_%s.jpg" % (picname[1],picname[2],picname[3],picname[4],imgname)
             print (command)
             subprocess.call(command, shell=True)
             #subprocess.call(command, shell=False)
