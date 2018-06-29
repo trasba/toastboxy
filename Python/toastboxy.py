@@ -5,9 +5,10 @@ from tkinter import *
 import time
 import picamera
 import subprocess
+import PIL
 from PIL import ImageTk, Image
 
-os.chdir('/home/pi/Downloads/Pyhton/')
+os.chdir('/home/pi/code/toastboxy/Python/')
 
 camera = picamera.PiCamera()
 #GPIO.setmode(GPIO.BCM)
@@ -26,7 +27,7 @@ time_old=time.time()
 camera.resolution = (2592,1944)
 #camera.hflip = True
 #camera.vflip = True
-camera.preview_alpha = 200
+camera.preview_alpha = 220
 global done
 done = False
 global bigfont
@@ -52,7 +53,9 @@ def initialize():
         c1.itemconfigure(tkimage[i], image = picturey, anchor=NW)
     c1.itemconfigure(text1,font=(smallfont),text='GET\nREADY\nPUSH\nTHE\nBUTTON')
     c1.update()
-    camera.start_preview(fullscreen=False, window=(-200,0,1920,1080))
+    camera.resolution = (1296,972)
+    camera.start_preview(fullscreen=False, window=(54,54,1296,972))
+    #camera.start_preview(fullscreen=False, window=(-200,0,1920,1080))
 	
 
 def processing():
@@ -86,9 +89,10 @@ def stuff(event):
         if main.number > 0 and main.number < 5:
             picname[main.number] = time.strftime("%Y%m%d-%H%M%S")
             #camera.start_preview(fullscreen=False, window=(-200,0,1920,1080))
-            countdown()      
-            camera.capture('storage/single_%s.jpg' % picname[main.number])#,resize=(740,555))
+            countdown()
             camera.stop_preview()
+            camera.resolution = (2592,1944)
+            camera.capture('storage/single_%s.jpg' % picname[main.number])#,resize=(740,555))
             
             im = Image.open('storage/single_%s.jpg' % picname[main.number])
             im = im.resize((740,555), Image.ANTIALIAS)
@@ -98,9 +102,12 @@ def stuff(event):
             c1.itemconfigure(text1,font=(smallfont),text='TAKE\nA\nPICTURE\n:-)')
             c1.update()
             time.sleep(2)
-            camera.start_preview(fullscreen=False, window=(-200,0,1920,1080))
+            camera.resolution = (1296,972)
+            camera.start_preview(fullscreen=False, window=(54,54,1296,972))
+            #camera.start_preview(fullscreen=False, window=(-200,0,1920,1080))
 
         if main.number == 4:
+            camera.stop_preview()
             c1.itemconfigure(text1,font=(smallfont),text='PICTURE\nOK?')
             c1.update()
             
@@ -114,7 +121,7 @@ def stuff(event):
             #t.start()
             print ("collage_%s.jpg" % imgname)
             command = "convert  -size 2802x1891 xc:skyblue \
-	    -draw \"image over 0,0 2802,1891 'frame.jpg'\" \
+	    -draw \"image over 0,0 2802,1891 'frame.gif'\" \
 	    -draw \"image over 90,90 1110,832 'storage/single_%s.jpg'\" \
 	    -draw \"image over 1230,90 1110,832 'storage/single_%s.jpg'\" \
 	    -draw \"image over  90,952 1110,832 'storage/single_%s.jpg'\" \
@@ -124,7 +131,7 @@ def stuff(event):
             subprocess.call(command, shell=True)
             #subprocess.call(command, shell=False)
             #done = True
-            command = "lp -d Canon_CP910 /home/pi/Downloads/Pyhton/storage/collage_%s.jpg" % (imgname)
+            command = "lp -d Canon_CP910 /home/pi/code/toastboxy/Python/storage/collage_%s.jpg" % (imgname)
             subprocess.call(command, shell=True)
             #time.sleep(1)
             initialize()
@@ -135,6 +142,8 @@ def undo(event):
     if main.number != 0:
         c1.itemconfigure(tkimage[main.number], image = picturey, anchor=NW)
         main.number -=1
+        camera.resolution = (1296,972)
+        camera.start_preview(fullscreen=False, window=(54,54,1296,972))    
 	
 main = Tk()
 main.state = True
